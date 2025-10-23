@@ -51,4 +51,4 @@ jobs:
           docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest
 
       - name: Docker compose up
-        run: docker-compose up -d
+        run: docker compose up -d
