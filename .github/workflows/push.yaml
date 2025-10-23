@@ -10,8 +10,8 @@ env:
   PROJECT_ID: build-project-476008
   REGION: europe-north2
   GAR_LOCATION: europe-north2-docker.pkg.dev/build-project-476008/monitoring 
-  TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
-  TF_VAR_location: ${{ secrets.LOCATION}}
+  TF_VAR_project_id: ${{ env.PROJECT_ID }}
+  TF_VAR_location: ${{ env.LOCATION}}
 
 jobs:
   terraform:
@@ -40,9 +40,6 @@ jobs:
         run: terraform fmt -check
 
       - name: Terraform Apply
-        env:
-          TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
-          TF_VAR_location: ${{ secrets.LOCATION }}
         run: terraform apply --auto-approve
 
   build-push-artifact:
