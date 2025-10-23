@@ -3,6 +3,12 @@ name: image-build-push
 on:
   push:
     branches: ["main"]
+    paths:
+        - 'terraform/**'
+        - 'prometheus/**'
+        - 'node_exporter/**'
+        - 'prometheus**'
+
   # pull_request:
   #   branches: ["main"]
 
