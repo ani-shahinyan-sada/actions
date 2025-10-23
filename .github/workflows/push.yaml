@@ -10,6 +10,8 @@ env:
   PROJECT_ID: build-project-476008
   REGION: europe-north2
   GAR_LOCATION: europe-north2-docker.pkg.dev/build-project-476008/monitoring 
+  TF_VAR_project_id: ${{ secrets.PROJECT_ID }}
+  TF_VAR_location: ${{ secrets.LOCATION}}
 
 jobs:
   terraform:
