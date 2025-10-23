@@ -42,5 +42,9 @@ jobs:
       - name: Terraform Apply
         run: terraform apply --auto-approve
 
-      - name: SSH in the VM 
-        run: gcloud compute ssh [USER@]my_instance --zone=us-central1-a --command='YOUR_COMMAND_HERE'
+      - name: SSH in the VM and pull image
+        run: |
+          gcloud compute ssh my-instance 
+          docker pull gcr.io/build-project-476008/monitoring/graf:latest
+          docker pull gcr.io/build-project-476008/monitoring/node:latest
+          docker pull gcr.io/build-project-476008/monitoring/prom:latest
