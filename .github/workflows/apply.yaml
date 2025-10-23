@@ -1,0 +1,48 @@
+name: 'Terraform Push Workflow for Apply'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ssh-vm/**'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ssh-vm
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+          terraform_wrapper: false
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v3'
+        with:
+          credentials_json: '${{ secrets.SA_JSON }}' 
+      
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
+      # - name: Show Terraform Outputs in Summary
+      #   if: always()
+      #   run: |
+      #     terraform init -input=false
+      #     echo "## 📋 Terraform APPLY Results" >> $GITHUB_STEP_SUMMARY
+      #     LB_IP=$(terraform output -raw lb_ip)
+      #     echo "## 🧩 Terraform Outputs" >> $GITHUB_STEP_SUMMARY
+      #     echo "" >> $GITHUB_STEP_SUMMARY
+      #     echo "**lb_ip:** \`$LB_IP\`" >> $GITHUB_STEP_SUMMARY
+      #     echo '```' >> $GITHUB_STEP_SUMMARY
