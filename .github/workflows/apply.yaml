@@ -1,3 +1,8 @@
+
+#europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf
+#europe-north2-docker.pkg.dev/build-project-476008/monitoring/node
+#europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom
+
 name: 'Terraform Push Workflow for Apply'
 on:
   push:
@@ -36,13 +41,6 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply --auto-approve
-      # - name: Show Terraform Outputs in Summary
-      #   if: always()
-      #   run: |
-      #     terraform init -input=false
-      #     echo "## 📋 Terraform APPLY Results" >> $GITHUB_STEP_SUMMARY
-      #     LB_IP=$(terraform output -raw lb_ip)
-      #     echo "## 🧩 Terraform Outputs" >> $GITHUB_STEP_SUMMARY
-      #     echo "" >> $GITHUB_STEP_SUMMARY
-      #     echo "**lb_ip:** \`$LB_IP\`" >> $GITHUB_STEP_SUMMARY
-      #     echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: SSH in the VM 
+        run: gcloud compute ssh [USER@]my_instance --zone=us-central1-a --command='YOUR_COMMAND_HERE'
