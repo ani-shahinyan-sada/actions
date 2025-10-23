@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./gcp_lesson1_homework
+        working-directory: ./terraform
     steps:
       - uses: actions/checkout@v5
       - name: Setup Terraform
