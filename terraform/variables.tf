@@ -1,7 +1,7 @@
 variable "location" {
-    description = "the location of the cloud build operations"
-    default = ""
-    type = string
+  description = "the location of the cloud build operations"
+  default     = ""
+  type        = string
 }
 
 # variable "build_name" {
@@ -11,9 +11,9 @@ variable "location" {
 # }
 
 variable "project_id" {
-    description = "the cloud build operations project"
-    default = ""
-    type = string
+  description = "the cloud build operations project"
+  default     = ""
+  type        = string
 }
 
 # variable "secret_id" {

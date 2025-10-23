@@ -1,11 +1,11 @@
 resource "google_service_account" "service_account" {
   account_id   = "sa-for-workflow"
   display_name = "Service Account for Workflows"
-  project = var.project_id
+  project      = var.project_id
 }
 
 data "google_service_account" "object_viewer" {
-  project = var.project_id
+  project    = var.project_id
   account_id = "sa-for-workflow"
 }
 
