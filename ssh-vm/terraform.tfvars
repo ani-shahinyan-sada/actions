@@ -18,7 +18,7 @@ firewall_priority  = 1000
 protocol           = "tcp"
 metadata_config    = "INCLUDE_ALL_METADATA"
 
-tags                    = ["http-server", "ssh-server"]
+tags                    = ["http-server", "ssh"]
 network_name            = "ssh-docker-vm"
 shared_vpc_host         = false
 auto_create_subnetworks = true
