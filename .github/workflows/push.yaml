@@ -1,0 +1,65 @@
+name: image-build-push
+
+on:
+  push:
+    branches: ["main"]
+  # pull_request:
+  #   branches: ["main"]
+
+env:
+  PROJECT_ID: build-project-476008
+  REGION: europe-north2
+  GAR_LOCATION: europe-north2-docker.pkg.dev/build-project-476008/monitoring
+
+jobs:
+  build-push-artifact:
+    runs-on: ubuntu-latest
+    strategy:
+      # Define the loop inputs here
+      matrix:
+        include:
+          - context_path: ./node_exporter
+            image_name: node
+          - context_path: ./grafana
+            image_name: graf
+          - context_path: ./prometheus
+            image_name: prom
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v5"
+
+      - uses: 'google-github-actions/auth@v3'
+        with:
+          credentials_json: '${{ secrets.GCP_SA }}' 
+
+      - name: Login to Google Regiestery
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.GAR_LOCATION }}
+          username: _json_key
+          password: ${{ secrets.GCP_SA }} 
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push ${{ matrix.image_name }}
+        uses: docker/build-push-action@v6
+        with:
+          # The context changes based on the matrix
+          context: ${{ matrix.context_path }} 
+          push: true
+          tags: |
+            ${{ env.GAR_LOCATION }}/${{ matrix.image_name }}:latest
+            ${{ env.GAR_LOCATION }}/${{ matrix.image_name }}:${{ github.sha }}
+      
+      # - name: Build and push
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     context: ./v1
+      #     push: true
+      #     tags: |
+      #       ${{ env.GAR_LOCATION }}/node:latest
+      #       ${{ env.GAR_LOCATION }}/node:${{ github.sha }}
