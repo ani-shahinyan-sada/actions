@@ -16,11 +16,7 @@ variable "project_id" {
   type        = string
 }
 
-# variable "secret_id" {
-#     description = "the cloud build operations secret secret id"
-#     default = ""
-#     type = string
-# }
+
 
 # variable "github_secret_value" {
 #     description = "the literal personal access token for github"
