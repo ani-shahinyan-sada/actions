@@ -23,15 +23,15 @@ variable "fw_rules" {
 }
 
 variable "firewall_direction" {
-    description = "ingress or egress"
-    default = ""
-    type = string
+  description = "ingress or egress"
+  default     = ""
+  type        = string
 }
 
 variable "firewall_priority" {
-    description = "PRIORITY OF THE FIREWALL RULE (bigger number=smaller priority and vice versa)"
-    default = ""
-    type = string
+  description = "PRIORITY OF THE FIREWALL RULE (bigger number=smaller priority and vice versa)"
+  default     = ""
+  type        = string
 }
 
 variable "protocol" {

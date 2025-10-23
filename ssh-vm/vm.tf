@@ -8,7 +8,7 @@ resource "google_compute_instance" "default" {
   machine_type = "n2-standard-2"
   zone         = "us-central1-a"
 
-  tags = var.tags
+  tags                      = var.tags
   allow_stopping_for_update = true
 
   boot_disk {
