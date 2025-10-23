@@ -9,9 +9,37 @@ on:
 env:
   PROJECT_ID: build-project-476008
   REGION: europe-north2
-  GAR_LOCATION: europe-north2-docker.pkg.dev/build-project-476008/monitoring
+  GAR_LOCATION: europe-north2-docker.pkg.dev/build-project-476008/monitoring 
 
 jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./gcp_lesson1_homework
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+          terraform_wrapper: false
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v3'
+        with:
+          credentials_json: '${{ secrets.GCP_SA }}' 
+      
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
+
   build-push-artifact:
     runs-on: ubuntu-latest
     strategy:
@@ -30,7 +58,7 @@ jobs:
 
       - uses: 'google-github-actions/auth@v3'
         with:
-          credentials_json: '${{ secrets.GCP_SA }}' 
+          credentials_json: '${{ secrets.GCP_SA}}' 
 
       - name: Login to Google Regiestery
         uses: docker/login-action@v3
