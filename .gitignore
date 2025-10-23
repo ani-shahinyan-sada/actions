@@ -17,7 +17,7 @@ crash.*.log
 *.tfvars
 
 # But allow the one in ssh-vm
-!actions/ssh-vm/*.tfvars
+!ssh-vm/*.tfvars
 *.tfvars.json
 
 # Ignore override files as they are usually used to override resources locally and so
