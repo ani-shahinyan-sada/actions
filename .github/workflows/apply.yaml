@@ -44,7 +44,7 @@ jobs:
 
       - name: SSH in the VM and pull image
         run: |
-          gcloud compute ssh my-instance 
+          gcloud compute ssh my-instance --zone=us-central1-a
           docker pull gcr.io/build-project-476008/monitoring/graf:latest
           docker pull gcr.io/build-project-476008/monitoring/node:latest
           docker pull gcr.io/build-project-476008/monitoring/prom:latest
