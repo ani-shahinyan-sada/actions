@@ -73,7 +73,7 @@ jobs:
         run: |
           gcloud compute ssh my-instance --zone=us-central1-a --command "
             mkdir -p /home/monitoring &&
-            gsutil cp gs://bucket-name/file.txt /home/monitoring/
+            gsutil cp gs://bucket-jan-akhpers/docker-compose.yaml /home/monitoring/
           "
 
       # - name: SSH in the VM and pull image
