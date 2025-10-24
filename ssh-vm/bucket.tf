@@ -3,6 +3,7 @@ resource "google_storage_bucket" "auto-expire" {
   location      = "US"
   force_destroy = true
 
+  uniform_bucket_level_access = true
   lifecycle_rule {
     condition {
       age = 3
@@ -25,7 +26,7 @@ resource "google_storage_bucket" "auto-expire" {
 
 ##
 resource "google_storage_bucket_object" "picture" {
-  name       = "docker-compose"
+  name       = "docker-compose.yaml"
   source     = "docker-compose.yaml"
   bucket     = "bucket-jan-akhpers"
   depends_on = [google_storage_bucket.auto-expire]
