@@ -25,9 +25,23 @@ resource "google_storage_bucket" "auto-expire" {
 
 
 ###
-resource "google_storage_bucket_object" "picture" {
+resource "google_storage_bucket_object" "docker_compose" {
   name       = "docker-compose.yaml"
   source     = "docker-compose.yaml"
-  bucket     = "bucket-jan-akhpers"
+  bucket     = google_storage_bucket.auto-expire.name
+  depends_on = [google_storage_bucket.auto-expire]
+}
+
+resource "google_storage_bucket_object" "prometheus_config" {
+  name       = "prometheus.yml"
+  source     = "../prometheus/prometheus-config/prometheus.yml"
+  bucket     = google_storage_bucket.auto-expire.name
+  depends_on = [google_storage_bucket.auto-expire]
+}
+
+resource "google_storage_bucket_object" "grafana_datasources" {
+  name       = "datasources.yml"
+  source     = "../grafana/datasources.yml"
+  bucket     = google_storage_bucket.auto-expire.name
   depends_on = [google_storage_bucket.auto-expire]
 }

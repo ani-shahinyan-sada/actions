@@ -5,10 +5,7 @@ volumes:
 services:
 
   node-exporter:
-    build:
-      context: ../node_exporter
-      args:
-        arch: ${ARCH:-amd64}
+    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest
     container_name: node-exporter
     restart: unless-stopped
     ports:
@@ -17,16 +14,13 @@ services:
       - monitoring
 
   prometheus:
-    build:
-      context: ../prometheus
-      args:
-        arch: ${ARCH:-amd64}
+    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest
     container_name: prometheus
     restart: unless-stopped
     ports:
       - "9090:9090"
     volumes:
-      - ../prometheus/prometheus-config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prom:/prometheus
     networks:
       - monitoring
@@ -34,14 +28,13 @@ services:
       - node-exporter
 
   grafana:
-    build:
-      context: ../grafana
+    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest
     container_name: grafana
     restart: unless-stopped
     ports:
       - "3000:3000"
     volumes:
-      - ../grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
+      - ./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
       - grafana-data:/var/lib/grafana
     networks:
       - monitoring

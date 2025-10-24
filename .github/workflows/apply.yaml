@@ -74,7 +74,9 @@ jobs:
           gcloud compute ssh my-instance --zone=us-central1-a --command "
             sudo mkdir -p /home/monitoring &&
             gsutil cp gs://bucket-jan-akhpers/docker-compose.yaml /tmp/ &&
-            sudo mv /tmp/docker-compose.yaml /home/monitoring/
+            gsutil cp gs://bucket-jan-akhpers/prometheus.yml /tmp/ &&
+            gsutil cp gs://bucket-jan-akhpers/datasources.yml /tmp/ &&
+            sudo mv /tmp/docker-compose.yaml /tmp/prometheus.yml /tmp/datasources.yml /home/monitoring/
           "
 
       # - name: SSH in the VM and pull image
