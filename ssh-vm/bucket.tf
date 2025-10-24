@@ -26,4 +26,5 @@ resource "google_storage_bucket_object" "picture" {
   name   = "docker-compose"
   source = "docker-compose.yaml"
   bucket = "bucket-jan-akhpers"
+  depends_on = [ google_storage_bucket.auto-expire ]
 }
