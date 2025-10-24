@@ -54,6 +54,9 @@ jobs:
             echo 'Startup script completed!'
           "
 
+      - name: Get the Docker compose file
+        run: gcloud 
+
       # - name: SSH in the VM and pull image
       #   run: |
       #     gcloud compute ssh my-instance --zone=us-central1-a --command "gcloud auth configure-docker europe-north2-docker.pkg.dev && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest"

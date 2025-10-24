@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "auto-expire" {
-  name          = "auto-expiring-bucket"
+  name          = "bucket-jan-akhpers"
   location      = "US"
   force_destroy = true
 
@@ -25,5 +25,5 @@ resource "google_storage_bucket" "auto-expire" {
 resource "google_storage_bucket_object" "picture" {
   name   = "docker-compose"
   source = "docker-compose.yaml"
-  bucket = "auto-expiring-bucket"
+  bucket = "bucket-jan-akhpers"
 }
