@@ -3,7 +3,7 @@ FROM alpine AS builder
 RUN apk add --no-cache wget tar
 RUN adduser -D -s /bin/sh prometheus
 
-ARG arch=arm64
+ARG arch=amd64
 
 ADD https://github.com/prometheus/prometheus/releases/download/v3.6.0-rc.1/prometheus-3.6.0-rc.1.linux-${arch}.tar.gz .
 RUN tar -xzf prometheus-3.6.0-rc.1.linux-${arch}.tar.gz
