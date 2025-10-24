@@ -62,6 +62,13 @@ jobs:
       #   run: |
       #     gcloud auth login --quiet
 
+      - name: Test bucket access from VM
+        run: |
+          gcloud compute ssh my-instance --zone=us-central1-a --command "gsutil ls gs://bucket-jan-akhpers/"
+
+
+
+
       - name: Copy files from bucket to VM
         run: |
           gcloud compute ssh my-instance --zone=us-central1-a --command "
