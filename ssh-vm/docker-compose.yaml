@@ -34,7 +34,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
+      - ./datasources.yml:/usr/share/grafana/conf/provisioning/datasources/datasources.yml:ro
       - grafana-data:/var/lib/grafana
     networks:
       - monitoring
