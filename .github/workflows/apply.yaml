@@ -44,11 +44,8 @@ jobs:
 
       - name: SSH in the VM and pull image
         run: |
-          gcloud compute ssh my-instance --zone=us-central1-a
-          gcloud auth configure-docker europe-north2-docker.pkg.dev
-          docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest
-          docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest
-          docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest
+          gcloud compute ssh my-instance --zone=us-central1-a --command "gcloud auth configure-docker europe-north2-docker.pkg.dev && docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest && docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest && docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest"
+        
 
       - name: Docker compose up
         run: docker compose up -d
