@@ -58,9 +58,9 @@ jobs:
             echo 'Startup script completed!'
           "
 
-      - name: Auth into gcloud
-        run: |
-          gcloud auth login --quiet
+      # - name: Auth into gcloud
+      #   run: |
+      #     gcloud auth login --quiet
 
       - name: Get the Docker compose file
         run: sudo gcloud storage cp gs://bucket-jan-akhpers/docker-compose /home/monitoring
