@@ -42,10 +42,22 @@ jobs:
       - name: Terraform Apply
         run: terraform apply --auto-approve
 
-      - name: SSH in the VM and pull image
+      - name: Wait for startup script to complete
         run: |
-          gcloud compute ssh my-instance --zone=us-central1-a --command "gcloud auth configure-docker europe-north2-docker.pkg.dev && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest"
+          gcloud compute ssh my-instance --zone=us-central1-a --command "
+            # Wait for startup script to finish
+            until sudo journalctl -u google-startup-scripts.service | grep -q 'Finished Google Compute Engine Startup Scripts'; do
+              echo 'Waiting for startup script to complete...'
+              sleep 10
+            done
+            
+            echo 'Startup script completed!'
+          "
+
+      # - name: SSH in the VM and pull image
+      #   run: |
+      #     gcloud compute ssh my-instance --zone=us-central1-a --command "gcloud auth configure-docker europe-north2-docker.pkg.dev && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest && sudo docker pull europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest"
         
 
-      - name: Docker compose up
-        run: docker compose up -d
+      # - name: Docker compose up
+      #   run: docker compose up -d
