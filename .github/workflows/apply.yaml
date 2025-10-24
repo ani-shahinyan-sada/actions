@@ -62,8 +62,12 @@ jobs:
       #   run: |
       #     gcloud auth login --quiet
 
-      - name: Get the Docker compose file
-        run: sudo gcloud storage cp gs://bucket-jan-akhpers/docker-compose /home/monitoring
+      - name: Copy files from bucket to VM
+        run: |
+          gcloud compute ssh my-instance --zone=us-central1-a --command "
+            mkdir -p /home/monitoring &&
+            gcloud storage cp gs://bucket-name/file.txt /home/monitoring/
+          "
 
       # - name: SSH in the VM and pull image
       #   run: |
