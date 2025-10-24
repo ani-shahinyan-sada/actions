@@ -24,3 +24,8 @@ resource "google_project_iam_member" "github_sa_storage_admin" {
   member  = "serviceAccount:${google_service_account.default.email}"
 }
 
+resource "google_storage_bucket_iam_member" "public_access" {
+  bucket = google_storage_bucket.auto-expire.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
