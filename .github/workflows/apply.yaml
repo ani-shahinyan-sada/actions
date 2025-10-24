@@ -55,7 +55,7 @@ jobs:
           "
 
       - name: Get the Docker compose file
-        run: gcloud cp gs://bucket-jan-akhpers/docker-compose /home/monitoring
+        run: gcloud storage cp gs://bucket-jan-akhpers/docker-compose /home/monitoring
 
       # - name: SSH in the VM and pull image
       #   run: |
