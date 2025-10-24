@@ -4,7 +4,7 @@ variable "location" {
   type        = string
 }
 
-###
+
 
 variable "project_id" {
   description = "the cloud build operations project"
