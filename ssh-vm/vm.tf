@@ -37,4 +37,10 @@ resource "google_compute_instance" "default" {
     email  = google_service_account.default.email
     scopes = ["cloud-platform"]
   }
+
+  depends_on = [
+    google_storage_bucket_iam_member.vm_bucket_access,
+    google_project_iam_member.artifact_registry_reader,
+    google_project_iam_member.github_sa_storage_admin
+  ]
 }
