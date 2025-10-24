@@ -24,7 +24,7 @@ resource "google_storage_bucket" "auto-expire" {
 }
 
 
-##
+###
 resource "google_storage_bucket_object" "picture" {
   name       = "docker-compose.yaml"
   source     = "docker-compose.yaml"
