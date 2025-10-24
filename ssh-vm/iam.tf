@@ -11,3 +11,9 @@ resource "google_project_iam_member" "artifact_registry_reader" {
   member  = "serviceAccount:${google_service_account.default.email}"
 }
 
+resource "google_storage_bucket_iam_member" "vm_bucket_access" {
+  bucket = "your-bucket-name"
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.default.email}"
+}
+
