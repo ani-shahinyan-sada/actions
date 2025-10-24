@@ -7,7 +7,7 @@ on:
         - 'terraform/**'
         - 'prometheus/**'
         - 'node_exporter/**'
-        - 'prometheus**'
+        - 'grafana/**'
 
   # pull_request:
   #   branches: ["main"]
