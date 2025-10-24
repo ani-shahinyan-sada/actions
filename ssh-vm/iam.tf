@@ -12,8 +12,21 @@ resource "google_project_iam_member" "artifact_registry_reader" {
 }
 
 resource "google_storage_bucket_iam_member" "vm_bucket_access" {
-  bucket = "your-bucket-name"
+  bucket = "bucket-jan-akhpers"
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:${google_service_account.default.email}"
 }
 
+# Give GitHub Actions SA permission to manage bucket IAM
+resource "google_project_iam_member" "github_sa_storage_admin" {
+  project = "build-project-476008"
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.default.email}"
+}
+
+# Then this will work - give VM SA permission to read from bucket
+resource "google_storage_bucket_iam_member" "vm_bucket_access" {
+  bucket = "bucket-jan-akhpers"  # Replace with real bucket name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.default.email}"
+}
