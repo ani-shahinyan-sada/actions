@@ -8,6 +8,8 @@ datasources:
   url: http://prometheus:9090
   isDefault: true
 
+#helloooo
+
 # - name: Loki
 #   type: loki
 #   access: proxy
