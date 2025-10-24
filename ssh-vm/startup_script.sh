@@ -33,50 +33,50 @@ gcloud auth configure-docker europe-north2-docker.pkg.dev --quiet
 mkdir -p /home/$USER/monitoring
 cd /home/$USER/monitoring
 
-# Create docker-compose.yml
-cat > docker-compose.yml <<'EOF'
-volumes:
-  prom:
-  grafana-data:
+# # Create docker-compose.yml
+# cat > docker-compose.yml <<'EOF'
+# volumes:
+#   prom:
+#   grafana-data:
 
-services:
+# services:
 
-  node-exporter:
-    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest
-    container_name: node-exporter
-    restart: unless-stopped
-    ports:
-      - "9100:9100"
-    networks:
-      - monitoring
+#   node-exporter:
+#     image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/node:latest
+#     container_name: node-exporter
+#     restart: unless-stopped
+#     ports:
+#       - "9100:9100"
+#     networks:
+#       - monitoring
 
-  prometheus:
-    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest
-    container_name: prometheus
-    restart: unless-stopped
-    ports:
-      - "9090:9090"
-    volumes:
-      - prom:/prometheus
-    networks:
-      - monitoring
-    depends_on:
-      - node-exporter
+#   prometheus:
+#     image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/prom:latest
+#     container_name: prometheus
+#     restart: unless-stopped
+#     ports:
+#       - "9090:9090"
+#     volumes:
+#       - prom:/prometheus
+#     networks:
+#       - monitoring
+#     depends_on:
+#       - node-exporter
 
-  grafana:
-    image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest
-    container_name: grafana
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-data:/var/lib/grafana
-    networks:
-      - monitoring
-    depends_on:
-      - prometheus
+#   grafana:
+#     image: europe-north2-docker.pkg.dev/build-project-476008/monitoring/graf:latest
+#     container_name: grafana
+#     restart: unless-stopped
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - grafana-data:/var/lib/grafana
+#     networks:
+#       - monitoring
+#     depends_on:
+#       - prometheus
 
-networks:
-  monitoring:
-    driver: bridge
-EOF
+# networks:
+#   monitoring:
+#     driver: bridge
+# EOF
