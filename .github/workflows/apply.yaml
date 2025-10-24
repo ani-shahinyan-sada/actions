@@ -60,4 +60,4 @@ jobs:
         
 
       - name: Docker compose up
-        run: gcloud compute ssh my-instance --zone=us-central1-a --command "docker compose up -d"
+        run: gcloud compute ssh my-instance --zone=us-central1-a --command "cd /home/monitoring && docker compose up -d"
