@@ -24,9 +24,3 @@ resource "google_project_iam_member" "github_sa_storage_admin" {
   member  = "serviceAccount:${google_service_account.default.email}"
 }
 
-# Then this will work - give VM SA permission to read from bucket
-resource "google_storage_bucket_iam_member" "vm_bucket_access" {
-  bucket = "bucket-jan-akhpers"  # Replace with real bucket name
-  role   = "roles/storage.objectViewer"
-  member = "serviceAccount:${google_service_account.default.email}"
-}
