@@ -15,19 +15,19 @@ fw_rules = {
     name          = "allow-node-exporter"
     ports         = ["9100"]
     source_ranges = ["0.0.0.0/0"]
-    target_tags   = ["http_server"]
+    target_tags   = ["http-server"]
   },
   grafana = {
     name          = "allow-grafana"
     ports         = ["3000"]
     source_ranges = ["0.0.0.0/0"]
-    target_tags   = ["http_server"]
+    target_tags   = ["http-server"]
   }
   prometheus = {
     name          = "allow-prometheus"
     ports         = ["9090"]
     source_ranges = ["0.0.0.0/0"]
-    target_tags   = ["http_server"]
+    target_tags   = ["http-server"]
   }
 
 }
